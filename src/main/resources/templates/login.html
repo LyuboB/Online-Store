@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/commons::head}"></head>
+
+<body>
+    <header th:replace="fragments/commons::nav"></header>
+
+    <main>
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
+        <hr class="hr-3 w-25 bg-white" />
+        <form class="mx-auto w-25 bg-blur" th:action="@{/auth/login}" th:method="POST" th:object="${userLoginDTO}">
+
+            <h3 th:if="${#fields.hasErrors('*')}" class="mt-5 text-center">
+                <strong class="rounded  pl-3 text-danger">
+                    Enter valid email and password!
+                </strong>
+            </h3>
+
+            <div class="form-group">
+                <div class="label-holder text-white d-flex justify-content-center">
+                    <label for="email" class="h3 mb-2">Email</label>
+                </div>
+                <input type="text" class="form-control" id="email" name="email" th:value="*{email}"
+                    aria-describedby="emailHelpInline" placeholder="Email" />
+                <small th:if="${#fields.hasErrors('*')}" id="emailHelpInline" class="bg-danger text-light rounded">
+                    The email address must be valid!
+                </small>
+            </div>
+
+            <div class="form-group">
+                <div class="label-holder text-white d-flex justify-content-center">
+                    <label for="password" class="h3 mb-2">Password</label>
+                </div>
+                <input type="password" class="form-control" id="password" name="password" th:value="*{password}"
+                    aria-describedby="passwordHelpInline" placeholder="Password" />
+                <small th:if="${#fields.hasErrors('*')}" id="passwordHelpInline" class="bg-danger text-light rounded">
+                    Password length must be between 3 and 20 characters!
+                </small>
+            </div>
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="btn btn-warning  mb-3">Login</button>
+            </div>
+
+        </form>
+    </main>
+    <footer th:replace="fragments/commons::footer"></footer>
+</body>
+
+
+</html>
